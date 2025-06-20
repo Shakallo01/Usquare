@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Umar Usman Usquare Enterprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a7221; /* Green color for agriculture */
+            --secondary: #ffffff;
+            --accent: #e8b10c; /* Gold accent */
+            --text: #333333;
+            --light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Fixed Header */
+        header {
+            background-color: var(--secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            height: 80px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            color: var(--primary);
+        }
+        
+        /* Navigation */
+        .desktop-nav {
+            display: flex;
+        }
+        
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .desktop-nav ul li {
+            margin-left: 30px;
+        }
+        
+        .desktop-nav ul li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 10px 0;
+            position: relative;
+        }
+        
+        .desktop-nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background-color: var(--secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-nav.active {
+            max-height: 300px;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+            padding: 20px 0;
+        }
+        
+        .mobile-nav ul li {
+            margin: 0;
+            text-align: center;
+        }
+        
+        .mobile-nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .mobile-nav ul li a:hover {
+            background-color: rgba(42, 114, 33, 0.1);
+            color: var(--primary);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('images/about.jfif');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+        
+        /* About Content */
+        .about-content {
+            padding: 60px 0;
+        }
+        
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Mission/Vision */
+        .mission-vision {
+            background-color: var(--light-gray);
+            padding: 60px 0;
+        }
+        
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .mv-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .mv-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .mv-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        /* Values */
+        .values {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .value-card {
+            background-color: var(--light-gray);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-section {
+                flex-direction: column;
+            }
+            
+            .mv-grid, .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                padding: 120px 0 60px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-nav-btn {
+                display: block;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                padding: 100px 0 40px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .about-content, .mission-vision, .values {
+                padding: 40px 0;
+            }
+            
+            .about-section {
+                margin-bottom: 40px;
+            }
+            
+            .mv-card {
+                padding: 30px 20px;
+            }
+            
+            .header-container {
+                padding: 15px 20px;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Usquare Enterprise Logo">
+                <div class="logo-text">
+                    <h1>Usquare Enterprise</h1>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Mobile Navigation Button -->
+            <button class="mobile-nav-btn" id="mobileNavBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About Our Enterprise</h1>
+            <p>Committed to excellence in agricultural trading and processing in Niger State</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-section">
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p>Umar Usman Usquare Enterprise was established as a registered agricultural business specializing in the buying and selling of goods, processing of paddy rice, and farming operations. From our base in Agaie, Niger State, we have grown to become a trusted name in the local agricultural sector.</p>
+                    <p>As a CAC-registered business, we maintain high standards of operation while supporting local farmers and traders with reliable services. Our operations combine traditional farming knowledge with modern processing techniques to deliver quality products to our customers.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Our farm operations">
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Our processing facility">
+                </div>
+                <div class="about-text">
+                    <h2>Our Operations</h2>
+                    <p>We operate across three main areas of agricultural business: procurement and distribution of agricultural goods, processing of paddy rice into premium finished products, and direct farming operations.</p>
+                    <p>Our processing facility in Agaie transforms locally-sourced paddy rice into high-quality finished products, while our trading operations connect farmers with markets across Niger State and beyond.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission/Vision -->
+    <section class="mission-vision">
+        <div class="container">
+            <h2 style="text-align: center;">Our Mission & Vision</h2>
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <h3>Our Mission</h3>
+                    <p>To provide reliable agricultural trading and processing services that support local farmers, deliver quality products to consumers, and contribute to food security in our community.</p>
+                </div>
+                <div class="mv-card">
+                    <h3>Our Vision</h3>
+                    <p>To become the leading agricultural enterprise in Niger State, recognized for quality processing, fair trading practices, and sustainable farming methods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values">
+        <div class="container">
+            <h2>Our Core Values</h2>
+            <p>Principles that guide our business operations</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Integrity</h3>
+                    <p>We conduct all business with honesty and transparency, building trust with farmers, customers, and partners.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Quality</h3>
+                    <p>From farm to processing, we maintain the highest standards to deliver superior agricultural products.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community</h3>
+                    <p>We are committed to supporting local farmers and contributing to the economic development of our region.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Usquare Enterprise</h3>
+                    <p>Your trusted partner in agricultural trading and processing in Niger State.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> No2 Kwagugi, Katcha Road</li>
+                        <li><i class="fas fa-city"></i> Agaie, Niger State</li>
+                        <li><i class="fas fa-phone-alt"></i>+234 906 502 0557</li>
+                        <li><i class="fas fa-envelope"></i> info@usquareenterprise.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Umar Usman Usquare Enterprise. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavBtn.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            
+            // Change icon between hamburger and close
+            const icon = this.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileNav.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                mobileNavBtn.querySelector('i').classList.remove('fa-times');
+                mobileNavBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+    </script>
+</body>
+</html>

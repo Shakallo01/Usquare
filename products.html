@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Umar Usman Usquare Enterprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a7221; /* Green color for agriculture */
+            --secondary: #ffffff;
+            --accent: #e8b10c; /* Gold accent */
+            --text: #333333;
+            --light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Fixed Header */
+        header {
+            background-color: var(--secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            height: 80px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            color: var(--primary);
+        }
+        
+        /* Navigation */
+        .desktop-nav {
+            display: flex;
+        }
+        
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .desktop-nav ul li {
+            margin-left: 30px;
+        }
+        
+        .desktop-nav ul li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 10px 0;
+            position: relative;
+        }
+        
+        .desktop-nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background-color: var(--secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-nav.active {
+            max-height: 300px;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+            padding: 20px 0;
+        }
+        
+        .mobile-nav ul li {
+            margin: 0;
+            text-align: center;
+        }
+        
+        .mobile-nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .mobile-nav ul li a:hover {
+            background-color: rgba(42, 114, 33, 0.1);
+            color: var(--primary);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('images/Agricultural Products.jfif');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+        
+        /* Product Categories */
+        .product-categories {
+            padding: 60px 0;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 5px 10px;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: var(--secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .availability {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #1f5a18;
+        }
+        
+        /* Processing Services */
+        .processing-services {
+            background-color: var(--light-gray);
+            padding: 60px 0;
+        }
+        
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-card {
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .service-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                padding: 120px 0 60px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-nav-btn {
+                display: block;
+            }
+            
+            .category-tabs {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                border-bottom: none;
+            }
+            
+            .tab-btn {
+                border-bottom: 3px solid transparent;
+                border-left: none;
+                text-align: center;
+                margin: 0 5px 10px;
+                padding: 10px 15px;
+            }
+            
+            .tab-btn.active {
+                border-bottom: 3px solid var(--primary);
+                border-left: none;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                padding: 100px 0 40px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .product-categories, .processing-services {
+                padding: 40px 0;
+            }
+            
+            .header-container {
+                padding: 15px 20px;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+            
+            .service-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Usquare Enterprise Logo">
+                <div class="logo-text">
+                    <h1>Usquare Enterprise</h1>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Mobile Navigation Button -->
+            <button class="mobile-nav-btn" id="mobileNavBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Agricultural Products</h1>
+            <p>Quality farm produce and processing services from our enterprise to your table</p>
+        </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="product-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="tab-btn active" data-tab="farm-produce">Farm Produce</button>
+                <button class="tab-btn" data-tab="processed-goods">Processed Goods</button>
+                <button class="tab-btn" data-tab="rice-products">Rice Products</button>
+            </div>
+            
+            <div id="farm-produce" class="tab-content active">
+                <h2 style="text-align: center; margin-bottom: 30px;">Fresh Farm Produce</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/fresh-rice.jfif" alt="Fresh Paddy Rice">
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Paddy Rice</h3>
+                            <p>High-quality paddy rice sourced directly from local farms in Niger State</p>
+                            <div class="product-meta">
+                                <span class="price">NGN25,000/bag</span>
+                                <span class="availability">In season</span>
+                            </div>
+                            <a href="contact.html" class="btn btn-primary">Inquire Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/maize.jfif" alt="Maize">
+                        </div>
+                        <div class="product-info">
+                            <h3>Maize</h3>
+                            <p>Premium quality maize grains for various uses</p>
+                            <div class="product-meta">
+                                <span class="price">NGN18,000/bag</span>
+                                <span class="availability">Available</span>
+                            </div>
+                            <a href="contact.html" class="btn btn-primary">Inquire Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Sorghum.jfif" alt="Sorghum">
+                        </div>
+                        <div class="product-info">
+                            <h3>Sorghum</h3>
+                            <p>Quality sorghum grains for human and animal consumption</p>
+                            <div class="product-meta">
+                                <span class="price">NGN15,000/bag</span>
+                                <span class="availability">Limited stock</span>
+                            </div>
+                            <a href="contact.html" class="btn btn-primary">Inquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="processed-goods" class="tab-content">
+                <h2 style="text-align: center; margin-bottom: 30px;">Processed Agricultural Goods</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Processed Rice.jfif" alt="Processed Rice">
+                        </div>
+                        <div class="product-info">
+                            <h3>Processed Rice</h3>
+                            <p>Premium quality processed rice ready for consumption</p>
+                            <div class="product-meta">
+                                <span class="price">NGN32,000/bag</span>
+                                <span class="availability">In stock</span>
+                            </div>
+                            <a href="contact.html" class="btn btn-primary">Order Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Maize Flour.jfif" alt="Maize Flour">
+                        </div>
+                        <div class="product-info">
+                            <h3>Maize Flour</h3>
+                            <p>Finely processed maize flour for various culinary uses</p>
+                            <div class="product-meta">
+                                <span class="price">NGN22,000/bag</span>
+                                <span class="availability">Available</span>
+                            </div>
+                            <a href="contact.html" class="btn btn-primary">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="rice-products" class="tab-content">
+                <h2 style="text-align: center; margin-bottom: 30px;">Rice Products</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Premium Rice.jfif" alt="Premium Rice">
+                        </div>
+                        <div class="product-info">
+                            <h3>Premium Rice</h3>
+                            <p>Our highest quality processed rice with excellent taste and texture</p>
+                            <div class="product-meta">
+                                <span class="price">NGN35,000/bag</span>
+                                <span class="availability">In stock</span>
+                            </div>
+                            <a href="contact.html" class="btn btn-primary">Order Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Standard Rice.jfif" alt="Standard Rice">
+                        </div>
+                        <div class="product-info">
+                            <h3>Standard Rice</h3>
+                            <p>Quality processed rice at an affordable price</p>
+                            <div class="product-meta">
+                                <span class="price">NGN28,000/bag</span>
+                                <span class="availability">Available</span>
+                            </div>
+                            <a href="contact.html" class="btn btn-primary">Order Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="images/Rice Bran.jfif" alt="Rice Bran">
+                        </div>
+                        <div class="product-info">
+                            <h3>Rice Bran</h3>
+                            <p>Nutritious by-product of rice processing for animal feed</p>
+                            <div class="product-meta">
+                                <span class="price">NGN8,000/bag</span>
+                                <span class="availability">In stock</span>
+                            </div>
+                            <a href="contact.html" class="btn btn-primary">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Processing Services -->
+    <section class="processing-services">
+        <div class="container">
+            <h2 style="text-align: center;">Rice Processing Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">We offer professional paddy rice processing services to transform your harvest into premium finished products</p>
+            
+            <div class="service-cards">
+                <div class="service-card">
+                    <h3>Custom Rice Processing</h3>
+                    <p>Bring your paddy rice to our facility for professional processing. We offer:</p>
+                    <ul>
+                        <li>Cleaning and husking</li>
+                        <li>Polishing and grading</li>
+                        <li>Quality control</li>
+                        <li>Packaging options</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Rate:</strong> NGN3,000 per bag</p>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top: 20px; display: inline-block; width: auto;">Schedule Processing</a>
+                </div>
+                
+                <div class="service-card">
+                    <h3>Bulk Processing Contracts</h3>
+                    <p>For large-scale farmers and cooperatives, we offer:</p>
+                    <ul>
+                        <li>Volume discounts</li>
+                        <li>Scheduled processing slots</li>
+                        <li>Storage options</li>
+                        <li>Transportation arrangements</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Contact us for customized rates</strong></p>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top: 20px; display: inline-block; width: auto;">Inquire About Contracts</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Usquare Enterprise</h3>
+                    <p>Your trusted partner in agricultural trading and processing in Niger State.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fas fa-phone-alt"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> No2 Kwagugi, Katcha Road</li>
+                        <li><i class="fas fa-city"></i> Agaie, Niger State</li>
+                        <li><i class="fas fa-phone-alt"></i> +234 906 502 0557</li>
+                        <li><i class="fas fa-envelope"></i> info@usquareenterprise.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Umar Usman Usquare Enterprise. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavBtn.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            
+            // Change icon between hamburger and close
+            const icon = this.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileNav.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                mobileNavBtn.querySelector('i').classList.remove('fa-times');
+                mobileNavBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
